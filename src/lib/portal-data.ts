@@ -19,7 +19,14 @@ export interface NavItem {
   key: string;
   label: string;
   view?: ViewName;
-  children?: { label: string; view: ViewName; desc?: string }[];
+  children?: {
+    label: string;
+    labelKey?: string;
+    view: ViewName;
+    desc?: string;
+    descKey?: string;
+    params?: Record<string, string>;
+  }[];
 }
 
 export const NAV_ITEMS: NavItem[] = [
@@ -28,18 +35,24 @@ export const NAV_ITEMS: NavItem[] = [
     key: 'about',
     label: 'معرفی',
     children: [
-      { label: 'امداد در یک نگاه', view: 'about', desc: 'تاریخچه و معرفی کوتاه' },
-      { label: 'اهداف و رویکرد', view: 'about', desc: 'چشم‌انداز و اهداف راهبردی' },
-      { label: 'منشور اخلاقی', view: 'about', desc: 'ارزش‌ها و تعهدات ما' },
-      { label: 'آمار و عملکرد', view: 'about', desc: 'گزارش عملکرد سالانه' },
-      { label: 'ساختار سازمانی', view: 'about', desc: 'معاونت‌ها و ادارات کل' },
+      { label: 'امداد در یک نگاه', labelKey: 'about.glance', view: 'about', desc: 'تاریخچه و معرفی کوتاه', descKey: 'about.glance.desc', params: { tab: 'glance' } },
+      { label: 'هیأت امنا', labelKey: 'about.board', view: 'about', desc: 'اعضای هیأت امنا', descKey: 'about.board.desc', params: { tab: 'board' } },
+      { label: 'اهداف و رویکرد', labelKey: 'about.goals', view: 'about', desc: 'چشم‌انداز و اهداف راهبردی', descKey: 'about.goals.desc', params: { tab: 'goals' } },
+      { label: 'منشور اخلاقی', labelKey: 'about.charter', view: 'about', desc: 'ارزش‌ها و تعهدات ما', descKey: 'about.charter.desc', params: { tab: 'charter' } },
+      { label: 'آمار و عملکرد', labelKey: 'about.stats', view: 'about', desc: 'گزارش عملکرد سالانه', descKey: 'about.stats.desc', params: { tab: 'stats' } },
+      { label: 'ساختار سازمانی', labelKey: 'about.org', view: 'about', desc: 'معاونت‌ها و ادارات کل', descKey: 'about.org.desc', params: { tab: 'org' } },
+      { label: 'اساسنامه و قوانین', labelKey: 'about.statute', view: 'about', desc: 'چارچوب قانونی کمیته امداد', descKey: 'about.statute.desc', params: { tab: 'statute' } },
     ],
   },
   { key: 'news', label: 'پایگاه اطلاع‌رسانی', view: 'news' },
   {
     key: 'services',
     label: 'میز خدمت',
-    view: 'services',
+    children: [
+      { label: 'میز خدمات الکترونیک', labelKey: 'services.desk', view: 'services', desc: 'ثبت درخواست آنلاین خدمت', descKey: 'services.desk.desc' },
+      { label: 'مشارکت الکترونیکی', labelKey: 'services.participation', view: 'help', desc: 'پذیرش حامی و پرداخت صدقه', descKey: 'services.participation.desc', params: { tab: 'donate' } },
+      { label: 'پیشنهادات و ارتباط مردمی', labelKey: 'services.suggestions', view: 'contact', desc: 'ثبت پیشنهاد، انتقاد و درخواست', descKey: 'services.suggestions.desc' },
+    ],
   },
   { key: 'help', label: 'می‌خواهم کمک کنم', view: 'help' },
   { key: 'multimedia', label: 'چندرسانه‌ای', view: 'multimedia' },
@@ -48,10 +61,10 @@ export const NAV_ITEMS: NavItem[] = [
     key: 'more',
     label: 'بیشتر',
     children: [
-      { label: 'سامانه شفافیت', view: 'transparency', desc: 'گزارش شفاف هزینه‌کرد و بودجه' },
-      { label: 'سوالات متداول', view: 'faq', desc: 'پاسخ پرسش‌های رایج' },
-      { label: 'ارتباط با ما', view: 'contact', desc: 'آدرس و راه‌های ارتباطی' },
-      { label: 'مدیریت اخبار', view: 'admin', desc: 'ورود مدیران محتوا' },
+      { label: 'سامانه شفافیت', labelKey: 'more.transparency', view: 'transparency', desc: 'گزارش شفاف هزینه‌کرد و بودجه', descKey: 'more.transparency.desc' },
+      { label: 'سوالات متداول', labelKey: 'more.faq', view: 'faq', desc: 'پاسخ پرسش‌های رایج', descKey: 'more.faq.desc' },
+      { label: 'ارتباط با ما', labelKey: 'more.contact', view: 'contact', desc: 'آدرس و راه‌های ارتباطی', descKey: 'more.contact.desc' },
+      { label: 'مدیریت اخبار', labelKey: 'more.admin', view: 'admin', desc: 'ورود مدیران محتوا', descKey: 'more.admin.desc' },
     ],
   },
 ];

@@ -34,3 +34,56 @@ model Rating {
 
   @@index([newsId])
 }
+
+// Aggregate visitor statistics (single row, id = "global")
+model VisitorStat {
+  id            String   @id @default("global")
+  day           String   @default("") // Jalali YYYY/MM/DD for today counters
+  totalViews    Int      @default(0)
+  totalVisitors Int      @default(0)
+  todayViews    Int      @default(0)
+  todayVisitors Int      @default(0)
+  updatedAt     DateTime @updatedAt
+}
+
+// One row per browser session - used for "online now" counting
+model VisitLog {
+  id        String   @id @default(cuid())
+  sessionId String   @unique
+  browser   String   @default("")
+  lastSeen  DateTime @default(now())
+
+  @@index([lastSeen])
+}
+
+// Service desk online requests (میز خدمت)
+model ServiceRequest {
+  id           String   @id @default(cuid())
+  serviceId    String
+  serviceTitle String
+  name         String
+  mobile       String
+  province     String?
+  details      String?
+  status       String   @default("ثبت‌شده")
+  trackingCode String   @unique
+  createdAt    DateTime @default(now())
+
+  @@index([trackingCode])
+}
+
+// Electronic participation records (sponsorships & donations)
+model Contribution {
+  id           String   @id @default(cuid())
+  kind         String // "sponsor" | "donate"
+  category     String
+  amount       Int
+  name         String
+  mobile       String
+  province     String?
+  message      String?
+  trackingCode String   @unique
+  createdAt    DateTime @default(now())
+
+  @@index([trackingCode])
+}

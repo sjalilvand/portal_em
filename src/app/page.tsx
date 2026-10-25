@@ -34,9 +34,11 @@ import {
   FaqView,
   MultimediaView,
   ProvincesView,
-  TransparencyView,
 } from '@/views/misc-views';
+import { TransparencyView } from '@/views/transparency-view';
 import { AdminView } from '@/views/admin-view';
+import { ChatWidget } from '@/components/portal/chat-widget';
+import { LangProvider } from '@/lib/i18n';
 import type { ViewName } from '@/lib/portal-data';
 
 interface ViewParams {
@@ -103,12 +105,14 @@ export default function PortalPage() {
   const isHome = view === 'home';
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <ScrollProgress />
-      <TopBar nav={nav} />
-      <Header nav={nav} />
-      <AccessibilityPanel nav={nav} />
-      <BackToTop />
+    <LangProvider>
+      <div className="flex min-h-screen flex-col">
+        <ScrollProgress />
+        <TopBar nav={nav} />
+        <Header nav={nav} />
+        <AccessibilityPanel nav={nav} />
+        <ChatWidget />
+        <BackToTop />
 
       <AnimatePresence mode="wait">
         <motion.main
@@ -145,7 +149,7 @@ export default function PortalPage() {
           ) : view === 'help' ? (
             <HelpView initialTab={params.tab} />
           ) : view === 'about' ? (
-            <AboutView nav={nav} />
+            <AboutView nav={nav} initialTab={params.tab} />
           ) : view === 'provinces' ? (
             <ProvincesView nav={nav} initialProvince={params.province} />
           ) : view === 'multimedia' ? (
@@ -163,6 +167,7 @@ export default function PortalPage() {
       </AnimatePresence>
 
       <Footer nav={nav} />
-    </div>
+      </div>
+    </LangProvider>
   );
 }

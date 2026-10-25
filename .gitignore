@@ -59,3 +59,5 @@ worklog.md
 agent-ctx/
 .zscripts/
 agent-ctx/
+tool-results/
+upload/

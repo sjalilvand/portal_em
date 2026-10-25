@@ -14,7 +14,7 @@ import { MotionConfig } from 'framer-motion';
 
 export type ThemeName = 'emerald' | 'azure' | 'royal' | 'sunset' | 'gold';
 export type FontName = 'vazirmatn' | 'sahel' | 'samim' | 'shabnam';
-export type FontScale = 0.9 | 1 | 1.15 | 1.3;
+export type FontScale = 0.9 | 1 | 1.15 | 1.3 | 1.45;
 
 export interface A11yFlags {
   grayscale: boolean;
@@ -151,6 +151,7 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
       setSettings((s) => ({
         ...s,
         theme: 'emerald',
+        mode: 'light',
         font: 'vazirmatn',
         fontScale: 1,
         a11y: { ...DEFAULT_SETTINGS.a11y },
