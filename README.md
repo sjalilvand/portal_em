@@ -36,19 +36,48 @@
 
 ## 🚀 اجرای پروژه
 
-```bash
-# نصب وابستگی‌ها
-bun install   # یا npm install
+### روش ۱ — ویندوز (یک‌کلیکی) 🪟
 
-# ساخت دیتابیس و داده اولیه
-bun run db:push
-bun run scripts/seed.ts
+پیش‌نیازها: [Node.js LTS](https://nodejs.org) و [Git for Windows](https://git-scm.com/download/win)
 
-# اجرای سرور توسعه
-bun run dev
+```bat
+git clone https://github.com/sjalilvand/portal_em.git D:\Projects\portal_emdad
+cd /d D:\Projects\portal_emdad
+start-windows.bat
 ```
 
-سپس `http://localhost:3000` را باز کنید.
+فایل `start-windows.bat` همه کارها را خودکار انجام می‌دهد: نصب وابستگی‌ها، آماده‌سازی دیتابیس، اجرای سرور و بازکردن مرورگر روی `http://localhost:3000`
+
+### روش ۲ — ویندوز (دستورات دستی)
+
+```bat
+git clone https://github.com/sjalilvand/portal_em.git D:\Projects\portal_emdad
+cd /d D:\Projects\portal_emdad
+npm install
+npx prisma generate
+npm run dev
+```
+
+سپس `http://localhost:3000` را در مرورگر باز کنید.
+
+### روش ۳ — لینوکس / مک
+
+```bash
+git clone https://github.com/sjalilvand/portal_em.git
+cd portal_em
+npm install
+npx prisma generate
+npm run dev
+```
+
+### نسخه Production (اختیاری)
+
+```bash
+npm run build    # ساخت نسخه بهینه + کپی خودکار فایل‌های استاتیک
+npm start        # اجرای سرور روی .next/standalone/server.js
+```
+
+> 💡 دیتابیس SQLite همراه با ۱۰ خبر نمونه و امتیازها در مخزن (`db/custom.db`) قرار دارد و نیازی به seed مجدد نیست. در صورت نیاز: `npm run db:push` و سپس `node scripts/seed.js`
 
 ### ورود به پنل مدیریت اخبار
 از منوی «بیشتر ← مدیریت اخبار» یا دکمه شناور دسترسی‌پذیری:
